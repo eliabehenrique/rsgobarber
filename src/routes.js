@@ -7,6 +7,7 @@ import authMiddleware from './app/middlewares/authMiddleware';
 import SessionsController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
 import ProviderController from './app/controllers/ProviderController';
+import AppointmentController from './app/controllers/AppointmentController';
 import FileController from './app/controllers/FileController';
 
 const routes = new Router();
@@ -20,6 +21,8 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 
 routes.get('/providers', ProviderController.index);
+
+routes.post('/appointments', AppointmentController.store);
 
 routes.post('/files', uploads.single('file'), FileController.store);
 
