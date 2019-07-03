@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import Appointment from '../models/Appointment';
@@ -21,14 +21,19 @@ class AppointmentController {
     const { provider_id, date } = req.body;
     const user_id = req.userId;
 
-    const isProvider = await User.findOne({
+    const provider = await User.findOne({
       where: { id: provider_id, provider: true },
     });
 
-    if (!isProvider)
+    if (!provider)
       return res
         .status(401)
         .json({ error: 'You can only create appointments with providers' });
+
+    if (provider.id === req.userId)
+      return res
+        .status(400)
+        .json({ error: "can't create appointment for himself" });
 
     const hourStart = startOfHour(parseISO(date));
 
@@ -92,6 +97,28 @@ class AppointmentController {
     });
 
     return res.json(appointments);
+  }
+
+  async delete(req, res) {
+    const appointment = await Appointment.findByPk(req.params.id);
+
+    if (appointment.user_id !== req.userId)
+      return res.status(401).json({
+        error: "You don't have permission to cancel this appointment",
+      });
+
+    const dateWithSub = subHours(appointment.date, 2);
+
+    if (isBefore(dateWithSub, new Date()))
+      return res
+        .status(401)
+        .json({ error: 'You can only cancel appointments 2 hours in advance' });
+
+    appointment.canceled_at = new Date();
+
+    await appointment.save();
+
+    return res.json(appointment);
   }
 }
 
