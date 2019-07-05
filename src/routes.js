@@ -9,6 +9,8 @@ import UserController from './app/controllers/UserController';
 import ProviderController from './app/controllers/ProviderController';
 import AppointmentController from './app/controllers/AppointmentController';
 import ScheduleController from './app/controllers/ScheduleController';
+import AvailableController from './app/controllers/AvailableController';
+import ProviderScheduleController from './app/controllers/ProviderScheduleController';
 import NotificationController from './app/controllers/NotificationController';
 import FileController from './app/controllers/FileController';
 
@@ -23,6 +25,8 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 
 routes.get('/providers', ProviderController.index);
+routes.get('/providers/:providerId/available', AvailableController.index);
+routes.post('/providers/schedules', ProviderScheduleController.store);
 
 routes.post('/appointments', AppointmentController.store);
 routes.get('/appointments', AppointmentController.index);
