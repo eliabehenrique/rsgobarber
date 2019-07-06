@@ -17,7 +17,14 @@ class ProviderScheduleController {
     const checkProvider = await User.findByPk(req.userId);
 
     if (!checkProvider.provider)
-      return res.status(401).json({ error: 'You not an provider' });
+      return res.status(401).json({ error: 'User not an provider' });
+
+    const checkProviderSchedule = await ProviderSchedule.findOne({
+      where: { provider_id: req.userId },
+    });
+
+    if (checkProviderSchedule)
+      return res.status(401).json({ error: 'Provider already has a schedule' });
 
     const { schedules } = req.body;
 
