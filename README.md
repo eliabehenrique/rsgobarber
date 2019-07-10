@@ -21,14 +21,14 @@ Optional: install [yarn (recommended)](https://yarnpkg.com/pt-BR/docs/getting-st
 2. within folder of project, create archive .env and set all configurations like on archive .env.example.
    1. obs: database PostgresDB; Mail for tests Mailtrap.io; handler exceptions with Sentry.io.
 
-3. yet within folder of project, run on terminal: yarn (for downloading of packages/dependencies)
+3. yet within folder of project, run on terminal: yarn (for downloading of packages/dependencies).
 
-4. yet on terminal, run: yarn dev | and in another terminal, run: yarn queue
+4. yet on terminal, run: yarn dev | and in another terminal, run: yarn queue.
 
-5. just enjoy! [I recommended use Insomnia(OpenSource Project) for tests of endpoint]
+5. just enjoy! [I recommended use Insomnia(OpenSource Project) for tests of endpoint].
 
-##### Sorry by any error of my English
-##### PS: Uma implementação seguindo o conteúdo sobre API Go Barber da Rocketseat - Bootcamp (GoStack 7.0)
+##### Sorry by any error of my English.
+##### PS: Uma implementação seguindo o conteúdo sobre API Go Barber da Rocketseat - Bootcamp (GoStack 7.0).
 
 
 
