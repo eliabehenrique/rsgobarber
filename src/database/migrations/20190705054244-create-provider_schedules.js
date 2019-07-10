@@ -12,7 +12,7 @@ module.exports = {
         references: { model: 'users', key: 'id' },
         allowNull: false,
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       schedules: {
         type: Sequelize.STRING,
